@@ -8,7 +8,7 @@ import { DATA } from '../data';
 export const MainScreen = ({ navigation }) => {
 
   const openPost = post => {
-    navigation.navigate('Post', { postId: post.id, date: post.date });
+    navigation.navigate('Post', { postId: post.id, date: post.date, booked: post.booked});
   }
   
   return (
@@ -31,7 +31,21 @@ MainScreen.navigationOptions = {
   headerRight: () => (
     // AppHeaderIcon выступает в роле компонента для рендера иконки
     <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-      <Item title='Сделать фото' iconName='ios-camera' onPress={() => console.log('press photo')}></Item>
+      <Item
+        title='Take photo'
+        iconName='ios-camera'
+        onPress={() => console.log('press Take photo')}
+      />
+    </HeaderButtons>
+  ),
+  headerLeft: () => (
+    // AppHeaderIcon выступает в роле компонента для рендера иконки
+    <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+      <Item
+        title='Toggle Drawer'
+        iconName='ios-menu'
+        onPress={() => console.log('press Toggle Drawer')}
+      />
     </HeaderButtons>
   )
 }
