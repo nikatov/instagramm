@@ -9,12 +9,11 @@ export const PostScreen = ({ navigation }) => {
 
   const removeHandler = () => (
     Alert.alert(
-      'Удаление поста',
+      'Внимание!',
       'Вы уверены, что хотите удалить пост?',
       [
         {
           text: 'Отмена',
-          onPress: () => console.log('Отменено удаление'),
           style: 'cancel'
         },
         {
