@@ -50,12 +50,14 @@ const BottomNavigator = createBottomTabNavigator(
   Post: { // Страница по-умолчанию, поэтому первая, чтобы не писать в конфиге 'initialRouteName: Post'
     screen: PostNavigator, // передача навигатора
     navigationOptions: {
+      tabBarLabel: 'Все',
       tabBarIcon: info => <Ionicons name='ios-albums' size={25} color={info.tintColor} /> // иконка, соотстветствующая скрину
     }
   },
   Booked: {
     screen: BookedNavigator, // передача навигатора
     navigationOptions: {
+      tabBarLabel: 'Избранное',
       tabBarIcon: info => <Ionicons name='ios-star' size={25} color={info.tintColor} /> // иконка, соотстветствующая скрину
     }
   }
