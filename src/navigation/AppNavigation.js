@@ -1,13 +1,14 @@
 import React from 'react'
+import { Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { Platform } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 import { MainScreen } from '../screens/MainScreen';
 import { PostScreen } from '../screens/PostScreen';
 import { BookedScreen } from '../screens/BookedScreen';
 import { THEME } from '../theme';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { Ionicons } from '@expo/vector-icons';
 
 const PostNavigator = createStackNavigator(
   { // Навигация
@@ -44,9 +45,11 @@ const BookedNavigator = createStackNavigator(
     },
   });
 
-// Объединение двух навигаторов
-const BottomNavigator = createBottomTabNavigator(
-  { // Навигация
+// ========== Объединение двух навигаторов (отдельные стеки переходов для Post (все) и Booked (избранное)) ==========
+
+// Конфиг с нижней навигацией между двумя навигаторами
+const bottomTabsConfig =
+{ // Навигация
   Post: { // Страница по-умолчанию, поэтому первая, чтобы не писать в конфиге 'initialRouteName: Post'
     screen: PostNavigator, // передача навигатора
     navigationOptions: {
@@ -61,11 +64,28 @@ const BottomNavigator = createBottomTabNavigator(
       tabBarIcon: info => <Ionicons name='ios-star' size={25} color={info.tintColor} /> // иконка, соотстветствующая скрину
     }
   }
-},
-{ // Конфиг
-  tabBarOptions: {
-    activeTintColor: THEME.MAIN_COLOR // Цвет иконок и текста под ними
-  }
-})
+}
+
+// Функция возвращает нужный BottomNavigator в зависимости от платформы
+const getBottomNavigator = () => {
+  // Отдельный нижний навигатор для андроида + доп. настройки
+  if (Platform.OS === 'android') {
+    return createMaterialBottomTabNavigator(bottomTabsConfig, {
+      activeTintColor: '#fff', // Цвет иконок и текста под ними
+      shifting: true, // текст только у иконки с выбранным навигатором
+      barStyle: {
+        backgroundColor: THEME.MAIN_COLOR
+      }
+    })
+  } // Отдельный нижний навигатор для ios + доп. настройки
+  else {
+    return createBottomTabNavigator(bottomTabsConfig, {
+      tabBarOptions: {
+        activeTintColor: THEME.MAIN_COLOR // Цвет иконок и текста под ними
+      }
+    })
+  };
+}
+const BottomNavigator = getBottomNavigator();
 
 export const AppNavigation = createAppContainer(BottomNavigator);
