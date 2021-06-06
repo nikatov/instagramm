@@ -5,8 +5,8 @@ import { DATA } from '../data';
 
 export const MainScreen = ({ navigation }) => {
 
-  const goToPost = () => {
-    navigation.navigate('Post');
+  const openPost = post => {
+    navigation.navigate('Post', { postId: post.id, date: post.date });
   }
   
   return (
@@ -16,7 +16,7 @@ export const MainScreen = ({ navigation }) => {
         keyExtractor={post => post.id.toString()}
         renderItem={({ item }) => {
           return (
-            <Post post={item}/>
+            <Post post={item} onOpen={() => openPost(item)}/>
           )
         }}
       />
