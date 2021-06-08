@@ -22,7 +22,7 @@ export const MainScreen = ({ navigation }) => {
   );
 }
 // Компоненту устанавливаем свойство, которое читается внутри Navigator'a
-MainScreen.navigationOptions = {
+MainScreen.navigationOptions = ({ navigation }) => ({
   headerTitle: 'Мой блог',
   headerRight: () => (
     // AppHeaderIcon выступает в роле компонента для рендера иконки
@@ -40,8 +40,8 @@ MainScreen.navigationOptions = {
       <Item
         title='Toggle Drawer'
         iconName='ios-menu'
-        onPress={() => console.log('press Toggle Drawer')}
+        onPress={() => navigation.toggleDrawer()}
       />
     </HeaderButtons>
   )
-}
+})

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
+    "drawer": "^0.0.2",
     "expo": "~41.0.1",
     "expo-app-loading": "^1.0.3",
     "expo-status-bar": "~1.0.4",
@@ -19,7 +20,8 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
     "react-native-paper": "^3.12.0",
     "react-native-web": "~0.13.12",
-    "react-navigation": "^4",
+    "react-navigation": "^4.4.4",
+    "react-navigation-drawer": "^2.7.1",
     "react-navigation-header-buttons": "^7.0.1",
     "react-navigation-material-bottom-tabs": "^2.3.4",
     "react-navigation-stack": "^2.10.4",
