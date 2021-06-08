@@ -21,6 +21,7 @@ export const MainScreen = ({ navigation }) => {
     />
   );
 }
+
 // Компоненту устанавливаем свойство, которое читается внутри Navigator'a
 MainScreen.navigationOptions = ({ navigation }) => ({
   headerTitle: 'Мой блог',
@@ -40,7 +41,7 @@ MainScreen.navigationOptions = ({ navigation }) => ({
       <Item
         title='Toggle Drawer'
         iconName='ios-menu'
-        onPress={() => navigation.toggleDrawer()}
+        onPress={() => navigation.openDrawer()}
       />
     </HeaderButtons>
   )

@@ -89,14 +89,28 @@ const getBottomNavigator = () => {
 }
 const BottomNavigator = getBottomNavigator();
 
+const AboutNavigator = createStackNavigator(
+  {
+    About: AboutScreen
+  },
+  navigationOptions
+);
+
+const CreateNavigator = createStackNavigator(
+  {
+    Create: CreateScreen
+  },
+  navigationOptions
+);
+
 const MainNavigator = createDrawerNavigator({
   PostTabs: {
     screen: BottomNavigator
   },
   About: {
-    screen: AboutScreen
+    screen: AboutNavigator
   },
-  Create: CreateScreen
+  Create: CreateNavigator
 });
 
 export const AppNavigation = createAppContainer(MainNavigator);
