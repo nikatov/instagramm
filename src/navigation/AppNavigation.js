@@ -10,21 +10,23 @@ import { PostScreen } from '../screens/PostScreen';
 import { BookedScreen } from '../screens/BookedScreen';
 import { THEME } from '../theme';
 
+const navigationOptions = {
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : '#fff',
+    },
+    headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR,
+  },
+}
+
 const PostNavigator = createStackNavigator(
   { // Навигация
     Main: MainScreen,
-    Post: {
-      screen: PostScreen
-    },
+    Post: PostScreen
   },
   { // Конфиг
     // initialRouteName: 'Main', // экран открывается первым по-умолчанию, тк первый в навигации
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : '#fff',
-      },
-      headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR,
-    },
+    navigationOptions
   });
 
 // Тк страницы списка постов и списка избранных постов идентичны, имеются лишь разные данные,
@@ -37,12 +39,7 @@ const BookedNavigator = createStackNavigator(
   },
   { // Конфиг
     // initialRouteName: 'Booked', // экран открывается первым по-умолчанию, тк первый в навигации
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : '#fff',
-      },
-      headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR,
-    },
+    navigationOptions
   });
 
 // ========== Объединение двух навигаторов (отдельные стеки переходов для Post (все) и Booked (избранное)) ==========

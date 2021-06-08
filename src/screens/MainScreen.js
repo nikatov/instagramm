@@ -1,28 +1,24 @@
 import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
-import { Post } from '../components/Post';
 import { DATA } from '../data';
+import { PostList } from '../components/PostList';
 
 export const MainScreen = ({ navigation }) => {
 
-  const openPost = post => {
-    navigation.navigate('Post', { postId: post.id, date: post.date, booked: post.booked});
+  const openPostHandler = post => {
+    navigation.navigate('Post', {
+      postId: post.id,
+      date: post.date,
+      booked: post.booked
+    });
   }
   
   return (
-    <View style={styles.main}>
-      <FlatList
-        data={DATA}
-        keyExtractor={post => post.id.toString()}
-        renderItem={({ item }) => {
-          return (
-            <Post post={item} onOpen={() => openPost(item)}/>
-          )
-        }}
-      />
-    </View>
+    <PostList
+      data={DATA}
+      openPostHandler={openPostHandler}
+    />
   );
 }
 // Компоненту устанавливаем свойство, которое читается внутри Navigator'a
@@ -49,9 +45,3 @@ MainScreen.navigationOptions = {
     </HeaderButtons>
   )
 }
-
-const styles = StyleSheet.create({
-  main: {
-    padding: 10
-  }
-})
