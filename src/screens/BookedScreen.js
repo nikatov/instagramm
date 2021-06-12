@@ -23,7 +23,7 @@ export const BookedScreen = ({ navigation }) => {
   
 }
 // Компоненту устанавливаем свойство, которое читается внутри Navigator'a
-BookedScreen.navigationOptions = {
+BookedScreen.navigationOptions = ({ navigation }) => ({
   headerTitle: 'Избранное',
   headerLeft: () => (
     // AppHeaderIcon выступает в роле компонента для рендера иконки
@@ -35,4 +35,4 @@ BookedScreen.navigationOptions = {
       />
     </HeaderButtons>
   )
-}
+})
