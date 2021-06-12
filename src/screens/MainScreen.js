@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
-import { DATA } from '../data';
 import { PostList } from '../components/PostList';
+import { loadPosts } from '../store/actions/post';
 
 export const MainScreen = ({ navigation }) => {
 
@@ -13,10 +14,18 @@ export const MainScreen = ({ navigation }) => {
       booked: post.booked
     });
   }
+
+  const dispatch = useDispatch();
+  // Вызовется, когда весь компонент отрендерится
+  useEffect(() => {
+    dispatch(loadPosts())
+  }, [])
+
+  const allPosts = useSelector(state => state.post.allPosts)
   
   return (
     <PostList
-      data={DATA}
+      data={allPosts}
       openPostHandler={openPostHandler}
     />
   );
