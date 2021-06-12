@@ -1,13 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Button, ScrollView, Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { DATA } from '../data';
 import { THEME } from '../theme';
+import { toggleBooked } from '../store/actions/post';
 
 export const PostScreen = ({ navigation }) => {
   const postId = navigation.getParam('postId');
   const post = DATA.find(el => el.id === postId);
+
+  // Определение находится ли текущий пост в избранном или нет
+  const bookedPosts = useSelector(state => state.post.bookedPosts)
+  const booked = bookedPosts.some(post => post.id === postId); // some возвращает true, если хотя бы один удовлетворяет условию
+  // Передача флага booked в navigation
+  useEffect(() => {
+    navigation.setParams({ booked })
+  }, [booked])
+
+  // useEffetc зависит от toggleHandler => произойдет зацикливание, тк при перерисовке функция пересоздается (изменяется)
+  // чтобы она не изменялась каждый раз при перерисовке используется useCallback с параметрами, изменение которых приведет
+  // к изменению функции toggleHandler
+  const dispatch = useDispatch();
+  const toggleHandler = useCallback(
+    () => dispatch(toggleBooked(postId)),
+    [postId]
+  );
+  // useEffect используется для передачи toggleHandler в navigation
+  // при изменении postId произойдет изменение toggleHandler
+  // при изменении toggleHandler новый toggleHandler передастся в navigation
+  useEffect(() => {
+    navigation.setParams({ toggleHandler })
+  }, [toggleHandler])
 
   const removeHandler = () => (
     Alert.alert(
@@ -47,15 +72,16 @@ PostScreen.navigationOptions = ({ navigation }) => {
   const date = navigation.getParam('date');
   const booked = navigation.getParam('booked')
   const iconName = booked ? 'ios-star' : 'ios-star-outline';
+  const toggleHandler = navigation.getParam('toggleHandler');
   return ({
     headerTitle: 'Пост от ' + new Date(date).toLocaleDateString(),
     headerRight: () => (
       // AppHeaderIcon выступает в роле компонента для рендера иконки
       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
         <Item
-          title='Take photo'
+          title='Star'
           iconName={iconName}
-          onPress={() => console.log('press Take photo')}
+          onPress={toggleHandler}
         />
       </HeaderButtons>
     ),
