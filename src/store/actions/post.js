@@ -8,16 +8,16 @@ export const loadPosts = () => {
   });
 }
 
-export const toggleBooked = id => {
+export const removePost = id => {
   return ({
-    type: TOGGLE_BOOKED,
+    type: REMOVE_POST,
     payload: id
   });
 }
 
-export const removePost = id => {
+export const toggleBooked = id => {
   return ({
-    type: REMOVE_POST,
+    type: TOGGLE_BOOKED,
     payload: id
   });
 }
