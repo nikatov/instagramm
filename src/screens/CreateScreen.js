@@ -12,19 +12,25 @@ export const CreateScreen = ({}) => {
 }
 
 // Компоненту устанавливаем свойство, которое читается внутри Navigator'a
-CreateScreen.navigationOptions = ({ navigation }) => ({
-  headerTitle: 'Создание поста',
-  headerLeft: () => (
-    // AppHeaderIcon выступает в роле компонента для рендера иконки
-    <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-      <Item
-        title='Toggle Drawer'
-        iconName='ios-menu'
-        onPress={() => navigation.openDrawer()}
-      />
-    </HeaderButtons>
-  )
-})
+CreateScreen.navigationOptions = ({ navigation }) => {
+  let optinos = {
+    headerTitle: 'Создание поста',
+  }
+  const noDrawer = navigation.getParam('noDrawer');
+  if (!noDrawer) {
+    optinos.headerLeft = () => (
+      // AppHeaderIcon выступает в роле компонента для рендера иконки
+      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+        <Item
+          title='Toggle Drawer'
+          iconName='ios-menu'
+          onPress={() => navigation.openDrawer()}
+        />
+      </HeaderButtons>
+    )
+  }
+  return optinos;
+}
 
 const styles = StyleSheet.create({
   main: {
