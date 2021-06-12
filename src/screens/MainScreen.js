@@ -31,7 +31,7 @@ MainScreen.navigationOptions = ({ navigation }) => ({
       <Item
         title='Take photo'
         iconName='ios-camera'
-        onPress={() => console.log('press Take photo')}
+        onPress={() => navigation.push('CreateFromPost', { noDrawer: true })}
       />
     </HeaderButtons>
   ),

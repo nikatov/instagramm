@@ -31,7 +31,7 @@ BookedScreen.navigationOptions = {
       <Item
         title='Toggle Drawer'
         iconName='ios-menu'
-        onPress={() => console.log('press Toggle Drawer')}
+        onPress={() => navigation.openDrawer()}
       />
     </HeaderButtons>
   )

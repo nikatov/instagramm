@@ -26,7 +26,8 @@ const navigationOptions = {
 const PostNavigator = createStackNavigator(
   { // Навигация
     Main: MainScreen,
-    Post: PostScreen
+    Post: PostScreen,
+    CreateFromPost: CreateScreen
   },
   { // Конфиг
     // initialRouteName: 'Main', // экран открывается первым по-умолчанию, тк первый в навигации
