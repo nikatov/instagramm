@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { THEME } from '../theme';
-import { toggleBooked } from '../store/actions/post';
+import { removePost, toggleBooked } from '../store/actions/post';
 
 export const PostScreen = ({ navigation }) => {
   const postId = navigation.getParam('postId');
@@ -46,13 +46,20 @@ export const PostScreen = ({ navigation }) => {
         },
         {
           text: 'Удалить',
-          onPress: () => console.log('Удаление поста'),
+          onPress: () => {
+            navigation.pop()
+            dispatch(removePost(postId)
+          )},
           style: 'danger'
         }
       ],
       { cancelable: false } // чтобы нельзя было закрыть окно по бекграунду
     )
   )
+
+  if(!post) {
+    return null;
+  }
 
   return (
     <ScrollView style={styles.main}>
