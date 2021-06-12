@@ -3,13 +3,14 @@ import { View, Text, Image, StyleSheet, Button, ScrollView, Alert } from 'react-
 import { useDispatch, useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
-import { DATA } from '../data';
 import { THEME } from '../theme';
 import { toggleBooked } from '../store/actions/post';
 
 export const PostScreen = ({ navigation }) => {
   const postId = navigation.getParam('postId');
-  const post = DATA.find(el => el.id === postId);
+  // получение текущего поста
+  const allPosts = useSelector(state => state.post.allPosts)
+  const post = allPosts.find(el => el.id === postId);
 
   // Определение находится ли текущий пост в избранном или нет
   const bookedPosts = useSelector(state => state.post.bookedPosts)
