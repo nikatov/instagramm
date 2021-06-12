@@ -1,8 +1,8 @@
 import React from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useSelector } from 'react-redux';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { PostList } from '../components/PostList';
-import { DATA } from '../data';
 
 export const BookedScreen = ({ navigation }) => {
 
@@ -13,15 +13,17 @@ export const BookedScreen = ({ navigation }) => {
       booked: post.booked
     });
   }
-  
+
+  const bookedPosts = useSelector(state => state.post.bookedPosts)
+
   return (
     <PostList
-      data={DATA.filter(el => el.booked)}
+      data={bookedPosts}
       openPostHandler={openPostHandler}
     />
   );
-  
 }
+
 // Компоненту устанавливаем свойство, которое читается внутри Navigator'a
 BookedScreen.navigationOptions = ({ navigation }) => ({
   headerTitle: 'Избранное',
