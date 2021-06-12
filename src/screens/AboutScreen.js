@@ -6,7 +6,11 @@ import { AppHeaderIcon } from '../components/AppHeaderIcon';
 export const AboutScreen = ({}) => {
   return (
     <View style={styles.main}>
-      <Text>AboutScreen</Text>
+      <Text>Это забавный, но серьезный текст,</Text>
+      <Text>описывающий идеологию данного приложения.</Text>
+      <Text>Оно призвано объединить людей со всего мира.</Text>
+      <Text>Наверное.</Text>
+      <Text>Версия приложения: <Text style={styles.version}>1.0.0</Text></Text>
     </View>
   );
 }
@@ -31,5 +35,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  version: {
+    fontFamily: 'open-bold'
   }
 })

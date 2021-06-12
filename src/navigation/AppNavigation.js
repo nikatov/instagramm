@@ -111,16 +111,16 @@ const MainNavigator = createDrawerNavigator({
       drawerLabel: 'Главная'
     }
   },
-  About: {
-    screen: AboutNavigator,
-    navigationOptions: {
-      drawerLabel: 'О приложении'
-    }
-  },
   Create: {
     screen: CreateNavigator,
     navigationOptions: {
       drawerLabel: 'Новый пост'
+    }
+  },
+  About: {
+    screen: AboutNavigator,
+    navigationOptions: {
+      drawerLabel: 'О приложении'
     }
   },
 }, {
