@@ -22,13 +22,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.destr0y.instagramm-unique-name",
+      "buildNumber": 1
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+      "package": "com.destr0y.instagramm_unique_name",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "description": ""
   }
