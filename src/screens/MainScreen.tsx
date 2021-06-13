@@ -7,6 +7,8 @@ import { loadPosts } from '../store/actions/post';
 import { NavigationRoute, NavigationScreenComponent, NavigationScreenProp } from 'react-navigation';
 import { useSelector } from '../store/hooks';
 import { IPost } from '../interfaces';
+import { THEME } from '../theme';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 
 export const MainScreen: NavigationScreenComponent<{}, NavigationScreenProp<NavigationRoute>> = ({ navigation }: { navigation : NavigationScreenProp<NavigationRoute> }) => {
 
@@ -25,7 +27,16 @@ export const MainScreen: NavigationScreenComponent<{}, NavigationScreenProp<Navi
   }, [])
 
   const allPosts = useSelector(state => state.post.allPosts)
-  
+  const loading = useSelector(state => state.post.loading);
+  if (loading) {
+    return (
+      <View style={styles.indicatorWrapper}>
+        <ActivityIndicator
+          color={THEME.MAIN_COLOR}
+        />
+      </View>
+    );
+  }
   return (
     <PostList
       data={allPosts}
@@ -58,3 +69,11 @@ MainScreen.navigationOptions = ({ navigation }: { navigation : any }) => ({
     </HeaderButtons>
   )
 })
+
+const styles = StyleSheet.create({
+  indicatorWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});

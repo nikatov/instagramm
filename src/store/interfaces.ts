@@ -33,7 +33,8 @@ export type IAction = ILoadPostsAction | IAddPostAction | IRemovePostAction | IT
 
 export interface IPostState {
   allPosts: IPost[],
-  bookedPosts: IPost[]
+  bookedPosts: IPost[],
+  loading: boolean
 }
 
 export interface IRootState {

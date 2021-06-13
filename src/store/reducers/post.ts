@@ -3,7 +3,8 @@ import { IActionType } from "../types";
 
 const initialState: IPostState = {
   allPosts: [],
-  bookedPosts: []
+  bookedPosts: [],
+  loading: true
 };
 
 export const postReducer = (state: IPostState = initialState, action: IAction ): IPostState => {
@@ -11,7 +12,8 @@ export const postReducer = (state: IPostState = initialState, action: IAction ):
     case IActionType.LOAD_POSTS: return {
       ...state,
       allPosts: action.payload.allPosts,
-      bookedPosts: action.payload.allPosts.filter(post => post.booked)
+      bookedPosts: action.payload.allPosts.filter(post => post.booked),
+      loading: false
     }
     case IActionType.ADD_POST: return {
       ...state,
