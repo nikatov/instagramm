@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, StyleSheet, TextInput, Button, Image, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { NavigationRoute, NavigationScreenComponent, NavigationScreenConfig, NavigationScreenConfigProps, NavigationScreenProp } from 'react-navigation';
 import { DrawerActions } from 'react-navigation-drawer';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useDispatch } from 'react-redux';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
+import { PhotoPicker } from '../components/PhotoPicker';
 import { IPostData } from '../interfaces';
 import { addPost } from '../store/actions/post';
 import { THEME } from '../theme';
@@ -14,18 +15,22 @@ import { THEME } from '../theme';
 
 export const CreateScreen: NavigationScreenComponent<{}, NavigationScreenProp<NavigationRoute>> = ({ navigation }: { navigation : NavigationScreenProp<NavigationRoute> }) => {
   const [text, setText] = useState('');
+  const [img, setImg] = useState<string | null>(null)
 
-  const img = 'https://ru-static.z-dn.net/files/d07/8ca0468aaa43e737ed0925b095c20258.jpg';
   const dispatch = useDispatch();
   const saveHandler = () => {
     const post: IPostData = {
       date: new Date().toJSON(),
       text: text,
-      img: img,
+      img: img as string,
       booked: false
     }
     dispatch(addPost(post));
     navigation.navigate('Main');
+  }
+
+  const photoPickHandler = (uri: string) => {
+    setImg(uri)
   }
   
   return (
@@ -42,17 +47,14 @@ export const CreateScreen: NavigationScreenComponent<{}, NavigationScreenProp<Na
             onChangeText={setText}
             multiline
           />
-          <Image
-            style={{
-              width: '100%',
-              height: 200
-            }}
-            source={{uri: 'https://ru-static.z-dn.net/files/d07/8ca0468aaa43e737ed0925b095c20258.jpg'}}
+          <PhotoPicker
+            onPick={photoPickHandler}
           />
           <Button
             title='Создать пост'
             color={THEME.MAIN_COLOR}
             onPress={saveHandler}
+            disabled={!text || !img}
           />
         </View>
       </TouchableWithoutFeedback>
