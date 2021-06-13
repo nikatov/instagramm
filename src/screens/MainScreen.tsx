@@ -21,7 +21,7 @@ export const MainScreen: NavigationScreenComponent<{}, NavigationScreenProp<Navi
   const dispatch = useDispatch();
   // Вызовется, когда весь компонент отрендерится
   useEffect(() => {
-    dispatch(loadPosts())
+    loadPosts()(dispatch);
   }, [])
 
   const allPosts = useSelector(state => state.post.allPosts)
