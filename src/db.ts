@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 import { SQLStatementErrorCallback } from 'expo-sqlite';
-import { IPost } from './interfaces';
+import { IPost, IPostData } from './interfaces';
 
 const db = SQLite.openDatabase('post.db');
 
@@ -33,8 +33,58 @@ export class DB {
           'SELECT * FROM posts',
           [],
           (_, result) => {
-            return result.rows._array as IPost[];
+            resolve((result.rows as any)._array as IPost[])
           },
+          (_, err) => {
+            reject(err);
+            return true;
+          }
+        );
+      })
+    });
+  }
+
+  static createPost({text, date, booked, img} : IPostData) {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'INSERT INTO posts (text, date, booked, img) VALUES (?, ?, ?, ?)',
+          [text, date, booked, img],
+          (_, result) => {
+            resolve(result.insertId);
+          },
+          (_, err) => {
+            reject(err);
+            return true;
+          }
+        );
+      })
+    });
+  }
+
+  static updatePost(id: string, booked: boolean) {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'UPDATE posts SET booked = ? WHERE id = ?',
+          [!booked, id],
+          resolve,
+          (_, err) => {
+            reject(err);
+            return true;
+          }
+        );
+      })
+    });
+  }
+
+  static removePost(id: string) {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'DELETE FROM posts WHERE id = ?',
+          [id],
+          resolve,
           (_, err) => {
             reject(err);
             return true;

@@ -2,7 +2,7 @@ export interface IPostData {
   img: string,
   text: string,
   date: string,
-  booked: Boolean
+  booked: boolean
 }
 
 export interface IPost extends IPostData {

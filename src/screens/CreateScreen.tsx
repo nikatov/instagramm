@@ -25,7 +25,11 @@ export const CreateScreen: NavigationScreenComponent<{}, NavigationScreenProp<Na
       img: img as string,
       booked: false
     }
-    addPost(post)(dispatch);
+    try {
+      addPost(post)(dispatch);
+    } catch(e) {
+      console.error(e);
+    }
     navigation.navigate('Main');
   }
 

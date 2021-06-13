@@ -7,13 +7,13 @@ import { THEME } from '../theme';
 import { removePost, toggleBooked } from '../store/actions/post';
 import { NavigationRoute, NavigationScreenComponent, NavigationScreenProp, StackActions } from 'react-navigation';
 import { useSelector } from '../store/hooks';
+import { IPost } from '../interfaces';
 
 export const PostScreen: NavigationScreenComponent<{}, NavigationScreenProp<NavigationRoute>> = ({ navigation }: { navigation : NavigationScreenProp<NavigationRoute> }) => {
   const postId = navigation.getParam('postId');
   // получение текущего поста
   const allPosts = useSelector(state => state.post.allPosts)
   const post = allPosts.find(el => el.id === postId);
-
   // Определение находится ли текущий пост в избранном или нет
   const bookedPosts = useSelector(state => state.post.bookedPosts)
   const booked = bookedPosts.some(post => post.id === postId); // some возвращает true, если хотя бы один удовлетворяет условию
@@ -27,8 +27,8 @@ export const PostScreen: NavigationScreenComponent<{}, NavigationScreenProp<Navi
   // к изменению функции toggleHandler
   const dispatch = useDispatch();
   const toggleHandler = useCallback(
-    () => toggleBooked(postId)(dispatch),
-    [postId]
+    () => toggleBooked(postId, booked)(dispatch),
+    [dispatch, postId, booked]
   );
   // useEffect используется для передачи toggleHandler в navigation
   // при изменении postId произойдет изменение toggleHandler
