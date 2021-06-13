@@ -1,8 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, GestureResponderEvent } from 'react-native';
 import { Post } from './Post';
+import { IPost } from '../interfaces';
 
-export const PostList = ({data, openPostHandler}) => (
+interface PostListProps {
+  data: IPost[],
+  openPostHandler: (post: IPost) => void;
+}
+
+export const PostList: React.FC<PostListProps> = ({data, openPostHandler}) => (
   <View style={styles.main}>
     <FlatList
       data={data}

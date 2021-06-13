@@ -11,7 +11,6 @@ import { PostScreen } from '../screens/PostScreen';
 import { BookedScreen } from '../screens/BookedScreen';
 import { AboutScreen } from '../screens/AboutScreen';
 import { CreateScreen } from '../screens/CreateScreen';
-
 import { THEME } from '../theme';
 
 const navigationOptions = {
@@ -22,6 +21,12 @@ const navigationOptions = {
     headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR,
   },
 }
+
+type PostStackParamList = {
+  Main: undefined,
+  Post: undefined,
+  CreateFromPost: undefined,
+};
 
 const PostNavigator = createStackNavigator(
   { // Навигация
@@ -56,14 +61,14 @@ const bottomTabsConfig =
     screen: PostNavigator, // передача навигатора
     navigationOptions: {
       tabBarLabel: 'Все',
-      tabBarIcon: info => <Ionicons name='ios-albums' size={25} color={info.tintColor} /> // иконка, соотстветствующая скрину
+      tabBarIcon: (info: any) => <Ionicons name='ios-albums' size={25} color={info.tintColor} /> // иконка, соотстветствующая скрину
     }
   },
   Booked: {
     screen: BookedNavigator, // передача навигатора
     navigationOptions: {
       tabBarLabel: 'Избранное',
-      tabBarIcon: info => <Ionicons name='ios-star' size={25} color={info.tintColor} /> // иконка, соотстветствующая скрину
+      tabBarIcon: (info: any) => <Ionicons name='ios-star' size={25} color={info.tintColor} /> // иконка, соотстветствующая скрину
     }
   }
 }
@@ -73,7 +78,7 @@ const getBottomNavigator = () => {
   // Отдельный нижний навигатор для андроида + доп. настройки
   if (Platform.OS === 'android') {
     return createMaterialBottomTabNavigator(bottomTabsConfig, {
-      activeTintColor: '#fff', // Цвет иконок и текста под ними
+      activeColor: '#fff', // Цвет иконок и текста под ними
       shifting: true, // текст только у иконки с выбранным навигатором
       barStyle: {
         backgroundColor: THEME.MAIN_COLOR

@@ -1,8 +1,14 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import { View, Text } from 'react-native';
+import { IPost } from '../interfaces';
 
-export const Post = ({post, onOpen}) => {
+interface PostProps {
+  post: IPost,
+  onOpen: () => void;
+}
+
+export const Post: React.FC<PostProps> = ({post, onOpen}) => {
   return (
     <TouchableOpacity onPress={onOpen}>
       <View style={styles.main}>

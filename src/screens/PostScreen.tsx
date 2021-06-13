@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Button, ScrollView, Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { THEME } from '../theme';
 import { removePost, toggleBooked } from '../store/actions/post';
+import { NavigationRoute, NavigationScreenComponent, NavigationScreenProp, StackActions } from 'react-navigation';
+import { useSelector } from '../store/hooks';
 
-export const PostScreen = ({ navigation }) => {
+export const PostScreen: NavigationScreenComponent<{}, NavigationScreenProp<NavigationRoute>> = ({ navigation }: { navigation : NavigationScreenProp<NavigationRoute> }) => {
   const postId = navigation.getParam('postId');
   // получение текущего поста
   const allPosts = useSelector(state => state.post.allPosts)
@@ -47,10 +49,10 @@ export const PostScreen = ({ navigation }) => {
         {
           text: 'Удалить',
           onPress: () => {
-            navigation.pop()
+            navigation.dispatch(StackActions.pop());
             dispatch(removePost(postId)
           )},
-          style: 'danger'
+          style: 'destructive'
         }
       ],
       { cancelable: false } // чтобы нельзя было закрыть окно по бекграунду

@@ -1,4 +1,6 @@
-export const DATA = [
+import { IPost } from "./interfaces";
+
+export const DATA: IPost[] = [
   {
     id: '1',
     img:

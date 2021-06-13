@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { NavigationRoute, NavigationScreenComponent, NavigationScreenProp } from 'react-navigation';
+import { DrawerActions, NavigationDrawerScreenComponent } from 'react-navigation-drawer';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 
-export const AboutScreen = ({}) => {
+export const AboutScreen: NavigationScreenComponent<{}, NavigationScreenProp<NavigationRoute>> = () => {
   return (
     <View style={styles.main}>
       <Text>Это забавный, но серьезный текст,</Text>
@@ -24,7 +26,7 @@ AboutScreen.navigationOptions = ({ navigation }) => ({
       <Item
         title='Toggle Drawer'
         iconName='ios-menu'
-        onPress={() => navigation.openDrawer()}
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
       />
     </HeaderButtons>
   )

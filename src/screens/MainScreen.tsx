@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { PostList } from '../components/PostList';
 import { loadPosts } from '../store/actions/post';
+import { NavigationRoute, NavigationScreenComponent, NavigationScreenProp } from 'react-navigation';
+import { useSelector } from '../store/hooks';
+import { IPost } from '../interfaces';
 
-export const MainScreen = ({ navigation }) => {
+export const MainScreen: NavigationScreenComponent<{}, NavigationScreenProp<NavigationRoute>> = ({ navigation }: { navigation : NavigationScreenProp<NavigationRoute> }) => {
 
-  const openPostHandler = post => {
+  const openPostHandler = (post: IPost) => {
     navigation.navigate('Post', {
       postId: post.id,
       date: post.date,
@@ -32,7 +35,7 @@ export const MainScreen = ({ navigation }) => {
 }
 
 // Компоненту устанавливаем свойство, которое читается внутри Navigator'a
-MainScreen.navigationOptions = ({ navigation }) => ({
+MainScreen.navigationOptions = ({ navigation }: { navigation : any }) => ({
   headerTitle: 'Мой блог',
   headerRight: () => (
     // AppHeaderIcon выступает в роле компонента для рендера иконки
