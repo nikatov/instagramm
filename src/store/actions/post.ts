@@ -1,4 +1,3 @@
-import { DATA } from "../../data";
 import { IPost, IPostData } from "../../interfaces";
 import { IAddPostAction, ILoadPostsAction, IRemovePostAction, IToggleBookedAction } from "../interfaces";
 import { IActionType } from "../types";
@@ -6,7 +5,7 @@ import { IActionType } from "../types";
 export const loadPosts = (): ILoadPostsAction => {
   return ({
     type: IActionType.LOAD_POSTS,
-    payload: { allPosts: DATA }
+    payload: { allPosts: [] }
   });
 }
 
