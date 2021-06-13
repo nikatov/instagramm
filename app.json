@@ -1,14 +1,19 @@
 {
   "expo": {
-    "name": "instagremm",
-    "slug": "instagremm",
-    "version": "1.0.0",
+    "name": "Instagramm",
+    "slug": "instagramm",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "2.7.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#303f9f"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,9 +29,6 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     },
     "description": ""
   }
