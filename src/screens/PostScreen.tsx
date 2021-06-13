@@ -27,7 +27,7 @@ export const PostScreen: NavigationScreenComponent<{}, NavigationScreenProp<Navi
   // к изменению функции toggleHandler
   const dispatch = useDispatch();
   const toggleHandler = useCallback(
-    () => dispatch(toggleBooked(postId)),
+    () => toggleBooked(postId)(dispatch),
     [postId]
   );
   // useEffect используется для передачи toggleHandler в navigation
@@ -50,8 +50,8 @@ export const PostScreen: NavigationScreenComponent<{}, NavigationScreenProp<Navi
           text: 'Удалить',
           onPress: () => {
             navigation.dispatch(StackActions.pop());
-            dispatch(removePost(postId)
-          )},
+            removePost(postId)(dispatch)
+          },
           style: 'destructive'
         }
       ],

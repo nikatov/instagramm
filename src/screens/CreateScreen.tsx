@@ -25,7 +25,7 @@ export const CreateScreen: NavigationScreenComponent<{}, NavigationScreenProp<Na
       img: img as string,
       booked: false
     }
-    dispatch(addPost(post));
+    addPost(post)(dispatch);
     navigation.navigate('Main');
   }
 
